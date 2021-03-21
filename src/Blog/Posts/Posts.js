@@ -15,14 +15,38 @@ class Posts extends Component{
         this.setState({selectedPostId:id});
     }
 
+    // componentDidMount(){
+    //     console.log(this.props);
+    //     axios.get('https://jsonplaceholder.typicode.com/posts').then(response=>{
+    //         const posts = response.data.slice(0,4);
+    //         const updatedPosts = posts.map(post=>{
+    //            return{//js object
+    //             ...post,
+    //             author:'Max'
+    //            }
+                
+    //         })
+    //         this.setState({posts: updatedPosts});//should in the then because if write outside the then, js will not wait for it
+    //         console.log(response);//the data on the top is from the json title
+    //     })
+    //     .catch(error=>{
+    //         //this.setState({error:true});
+    //         console.log(error);
+    //     });//async need time js directly run next line, so cannot directly store the data by using equal
+    //     //using Then() can wait the first method to be excuted using response object as import
+    // }
+
     componentDidMount(){
         console.log(this.props);
-        axios.get('https://jsonplaceholder.typicode.com/posts').then(response=>{
-            const posts = response.data.slice(0,4);
+        axios.get('https://ablink-backend.azurewebsites.net/Licences/AsfLicence/State/NT').then(response=>{
+            const posts = response.data;
+            this.setState({posts:response.data});
+            console.log(posts)//post json to console
             const updatedPosts = posts.map(post=>{
                return{//js object
                 ...post,
                 author:'Max'
+                
                }
                 
             })
@@ -36,17 +60,21 @@ class Posts extends Component{
         //using Then() can wait the first method to be excuted using response object as import
     }
 
+
+
     render(){
 
         let posts = <p style ={{textAlign:'center'}}>Something went wrong!</p>;
         if(!this.state.error){
+            // .split('')
         posts = this.state.posts.map(post =>{
-            return (<Link to = {'/' + post.id} id={post.id}>
+         
+        // const posts = this.state.posts.map(post =>{
+            return (<Link to = {'/' + post.data.number} id={post.data.number}>
             <Post
-             title ={post.title}
-              
-               author={post.author}
-               clicked = {()=>this.postSelectedHandler(post.id)}/>
+            name={post.data.name}
+            city ={post.data.city}
+            clicked = {()=>this.postSelectedHandler(post.data.number)}/>
                </Link>)
             });
         }
