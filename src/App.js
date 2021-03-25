@@ -5,13 +5,17 @@ import Header from './Header';
 import Home from './Home';
 import Directory from "./Directory";
 import { BrowserRouter } from "react-router-dom";
-import Blog from "./Blog/Blog"
+import Blog from "./Blog/Blog";
+
+import Signin from './signin/signin'
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div className="App">
           <Header />
+          {/* <Form /> */}
+
           <Blog />
           {/* <Switch>
     <Route exact path="/" component={Home}/>

@@ -41,7 +41,7 @@ class Posts extends Component{
         axios.get('https://ablink-backend.azurewebsites.net/Licences/AsfLicence/State/NT').then(response=>{
             const posts = response.data.data;
             this.setState({posts:response.data.data});
-            // console.log(posts)//post json to console
+            console.log(posts)//post json to console
             const updatedPosts = posts.map(post=>{
                return{//js object
                 ...post,
@@ -67,25 +67,9 @@ class Posts extends Component{
         let posts = <p style ={{textAlign:'center'}}>Something went wrong!</p>;
         if(!this.state.error){
             // .split('')
-            posts = this.state.posts;
+        posts = this.state.posts;
 
-
-
-
-            // posts.forEach(function(item){
-            //     for (var i=0; i< item.data.length; i++){
-            //         var myArr = [];
-            //         myArr.push(item.data[i].number);
-            //         myArr.push(item.data[i].name);
-            //         myArr.push(item.data[i].city);
-            //         item.data[i] = myArr;
-            //     }
-            // })
-
-
-        // posts = [{name:'kjk',city:'sds'},{name:'esdfs',city:'sdsdasds'}]
-        console.log(posts)
-        
+        console.log(posts);
         posts = posts.map(post =>{
          
         // const posts = this.state.posts.map(post =>{
@@ -93,7 +77,6 @@ class Posts extends Component{
             <Post
             name={post.name}
             city ={post.city}
-            postcode = {post.postcode}
             clicked = {()=>this.postSelectedHandler(post.number)}/>
                </Link>)
             });
