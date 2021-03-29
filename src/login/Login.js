@@ -9,7 +9,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="base-container">
+            <div className="base-container" ref={this.props.containRef}>
                 <div className="header">login</div>
                 <div className="content">
                     <div className="image">

@@ -8,14 +8,46 @@ import { BrowserRouter } from "react-router-dom";
 import Blog from "./Blog/Blog";
 import Login from "./login/Login";
 import Signin from './login/Login'
+import Register from "./login/Register"
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogginActive: true,
+
+    }
+  }
+  changeState() {
+    const { isLogginActive } = this.state;
+    if (isLogginActive) {
+      this.rightSide.classList.remove("right");
+      this.rightSide.classList.add("left");
+    }
+    else {
+      this.rightSide.classList.remove("left");
+      this.rightSide.classList.add("right");
+    }
+  }
+
+
   render() {
+    const { isLogginActive } = this.state;
+    const current = isLogginActive ? "Register" : "Login";
+    const currentActive = isLogginActive ? "login" : 'register';
     return (
       <BrowserRouter>
         <div className="App">
+          <div className="login">
+            <div className="container">
+              {isLogginActive && <Login containerRef={(ref) => this.current = ref} />}
+              {!isLogginActive && <Register containerRef={(ref) => this.current = ref} />}
+            </div>
+            <RightSide current={current} containerRef={ref => this.rightSide = ref} onClick={this.changeState.bind(this)} />
+          </div>
           <Header />
-        <Login/>
+          {/* <Login/> */}
 
           <Blog />
           {/* <Switch>
@@ -27,6 +59,15 @@ class App extends Component {
       </BrowserRouter>
     );
   }
+}
+
+
+const RightSide = (props) => {
+  return <div className='right-side' ref={props.containerRef} onClick={props.onClick}>
+    <div className='inner-container'>
+      <div className='text'>{props.current}</div>
+    </div>
+  </div>
 }
 
 export default App;
