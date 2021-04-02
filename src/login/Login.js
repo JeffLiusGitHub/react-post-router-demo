@@ -48,27 +48,16 @@ class Login extends React.Component {
         {
           // email: 'jeffliu@ablink.com',
           // password: '1234Ab1234'
-          Email: ${this.state.email},
-          Password: ${this.state.password}
+          Email: this.state.email,
+          Password: this.state.password
         },
-        headers:{'Content-Type': 'application/json'})
+        {headers:{'Content-Type': 'application/json'}})
         .then(response => {
           console.log(response);
         });
+      }
 
-        axios.post('https://ablink-backend.azurewebsites.net/Auth/Register',
-        {
-          // 'email': 'jeffliu@ablink.com',
-          // 'password': '1234Ab1234'
-          'email': {this.state.email},
-          'password': {this.state.password}
-        },
-        headers:{'X-Requested-With': 'XMLHttpRequest'})
-        .then(response => {
-          console.log(response);
-        });
-    }
-
+      
     render() {
         return (
 
